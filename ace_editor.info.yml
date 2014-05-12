@@ -1,0 +1,5 @@
+name: 'Ace Editor'
+type: module
+description: 'Use the ace editor in Drupal 8'
+core: 8.x
+package: Editors

@@ -1,0 +1,8 @@
+ace.c9.editor:
+  remote: https://github.com/ajaxorg/ace-builds.git
+  version: v1.1.3
+  js:
+    /libraries/ace-builds/src-min-noconflict/ace.js: { weight: -10 }
+drupal.ace:
+  js:
+    js/drupal.ace.js: { weight: -10 }
