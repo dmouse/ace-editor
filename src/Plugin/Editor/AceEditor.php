@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\ace_editor\Plugin\Editor\AceEditor.
+ */
+
 namespace Drupal\ace_editor\Plugin\Editor;
 
 use Drupal\Core\Cache\CacheBackendInterface;
@@ -12,6 +17,8 @@ use Drupal\editor\Plugin\EditorBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\editor\Entity\Editor as EditorEntity;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\editor\Plugin\EditorPluginInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Defines a Ace editor for Drupal.
@@ -24,8 +31,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   is_xss_safe = FALSE
  * )
  */
-class AceEditor extends EditorBase implements ContainerFactoryPluginInterface 
-{
+class AceEditor extends EditorBase implements ContainerFactoryPluginInterface {
 	
 	/**
    * The module handler to invoke hooks on.
@@ -65,8 +71,7 @@ class AceEditor extends EditorBase implements ContainerFactoryPluginInterface
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) 
-  {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $configuration,
       $plugin_id,
@@ -79,17 +84,14 @@ class AceEditor extends EditorBase implements ContainerFactoryPluginInterface
     /**
    * {@inheritdoc}
    */
-  public function getDefaultSettings() 
-  {
+  public function getDefaultSettings() {
     return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, array &$form_state, EditorEntity $editor) 
-  {
-    $form = [];
+  public function settingsForm(array $form, FormStateInterface $form_state, EditorEntity $editor) { 
     return $form;
   }
 
@@ -97,20 +99,15 @@ class AceEditor extends EditorBase implements ContainerFactoryPluginInterface
   /**
    * {@inheritdoc}
    */
-  public function settingsFormSubmit(array $form, array &$form_state) 
-  {
+  public function settingsFormSubmit(array $form, FormStateInterface $form_state) {
+    
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getJSSettings(EditorEntity $editor) 
-  {
-    $settings = array();
-
-    // Fall back on English if no matching language code was found.
-    $display_langcode = 'en';
-
+  public function getJSSettings(EditorEntity $editor) {
+    $settings = [];
     return $settings;
   }
 
@@ -119,10 +116,8 @@ class AceEditor extends EditorBase implements ContainerFactoryPluginInterface
    */
   public function getLibraries(EditorEntity $editor) {
     $libraries = array(
-      'ace_editor/ace.c9.editor',
       'ace_editor/drupal.ace'
     );
-
     return $libraries;
   }
 
